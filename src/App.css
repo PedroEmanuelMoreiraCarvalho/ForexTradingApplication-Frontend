@@ -76,7 +76,7 @@ body {
 
 .trading-quotes{
   flex-grow: 1;
-  min-width: 500px;
+  min-width: 360px;
   background-color: #3562;
 }
 
@@ -127,6 +127,20 @@ body {
   flex-direction: column;
   background-color: #d1d1d1;
   box-shadow: 4px 4px 6px #d8d8d8;
+}
+
+.login-area form{
+  gap: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#loading{
+  width: 40px;
+  display: flex;
+  margin: 0 auto;
+  padding-left: 10px;
+  justify-content: center;
 }
 
 .login-area input{

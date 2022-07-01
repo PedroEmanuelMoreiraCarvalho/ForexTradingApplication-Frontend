@@ -1,24 +1,24 @@
-import React from 'react';
-import { render, screen, queryByTestId } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 
-test('deposit button is rendering', () => {
-  render(<HomePage />);
-  const deposit_button = screen.getByText(/deposit/i);
-  expect(deposit_button).toBeInTheDocument();
-});
+describe('homepage components should not rendering on login',() => {
+  
+  const { queryByTestId } = render(<BrowserRouter><HomePage/></BrowserRouter>);
 
-test('trading component is rendering', () => {
-  const { queryByTestId } = render(<HomePage />);
-  expect(queryByTestId("trading-component")).toBeTruthy();
-});
+  test('deposit button is rendering', () => {
+    expect(queryByTestId("deposit-button")).not.toBeInTheDocument();
+  });
 
-test('real time quotes component is rendering', () => {
-  const { queryByTestId } = render(<HomePage />);
-  expect(queryByTestId("real-time-quotes")).toBeTruthy();
-});
-
-test('trading table component is rendering', () => {
-  const { queryByTestId } = render(<HomePage />);
-  expect(queryByTestId("trading-table")).toBeTruthy();
+  test('trading component is rendering', () => {
+    expect(queryByTestId("trading-component")).not.toBeTruthy();
+  });
+  
+  test('real time quotes component is rendering', () => {
+    expect(queryByTestId("real-time-quotes")).not.toBeTruthy();
+  });
+  
+  test('trading table component is rendering', () => {
+    expect(queryByTestId("trading-table")).not.toBeTruthy();
+  });
 });

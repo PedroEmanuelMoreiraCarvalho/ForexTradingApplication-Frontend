@@ -1,21 +1,25 @@
-import React from 'react';
+import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
 import './App.css';
+import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
+import { UserProvider } from './contexts/userContext';
 
-export interface IAppProps{}
-
-const App:React.FunctionComponent<IAppProps> = () => {
+const App = () => {
+  
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <CookiesProvider>
+      <UserProvider>
+        <div className="App">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </UserProvider>
+    </CookiesProvider>
   );
 }
 

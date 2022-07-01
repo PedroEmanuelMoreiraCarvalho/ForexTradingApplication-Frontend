@@ -1,7 +1,22 @@
+import { useContext, useEffect } from 'react';
+import {useCookies} from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import { UserContext } from '../contexts/userContext';
 export interface HomePageProps{}
 
 const HomePage:React.FunctionComponent<HomePageProps> = () => {
+  const navigate = useNavigate();
+  const [cookies] = useCookies();
+  const { user } = useContext(UserContext);
+
+  useEffect(()=>{
+    let user_cookie = cookies.user;
+    if(!!!user_cookie){
+      navigate("/login");
+    }
+  },[])
+
   return (
     <div>
       <div className='top-bar'>
@@ -11,7 +26,7 @@ const HomePage:React.FunctionComponent<HomePageProps> = () => {
         </div>
         <div className='user-info'>
           <button id='deposit-button'>Deposit</button>
-          <h3>US$ 2432.34</h3>
+          <h3>{`US$ ${user.cash.toFixed(2)}`}</h3>
         </div>
       </div>
       <div className='trading-content'>
